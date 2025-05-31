@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: Finance_Tracker
+  # Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/finance_tracker
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ***
+    password: ***
+  # Hibernate Configuration
+  jpa:
+    # Display SQL queries in console (optional, for development)
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  #  Mail configuration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ****
+    password: ****
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
