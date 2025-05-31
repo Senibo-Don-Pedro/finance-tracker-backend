@@ -31,7 +31,7 @@ public class User {
 
     @NotBlank
     @Column(nullable = false, unique = true)
-    @Email
+    @Email(message = "Please provide a valid email address") // Add custom message
     @Size(max = 50)
     private String email;
 

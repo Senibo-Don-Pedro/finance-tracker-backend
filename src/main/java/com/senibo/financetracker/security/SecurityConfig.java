@@ -92,7 +92,7 @@ public class SecurityConfig {
                 userRepository.save(user1);
             }
 
-            if (!userRepository.existsByUsername("admin")) {
+            if (!userRepository.existsByUsername("admin1")) {
                 User admin = new User("admin1@example.com", "admin1", "admin",
                         "1", passwordEncoder.encode("adminPassword"));
                 admin.setAccountNonLocked(true);

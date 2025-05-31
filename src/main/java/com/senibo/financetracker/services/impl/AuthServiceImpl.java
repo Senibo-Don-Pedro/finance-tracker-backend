@@ -35,6 +35,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void registerUser(SignUpRequest signUpRequest) {
+        // Debug logging
+        System.out.println("SignUpRequest email: [" + signUpRequest.email() + "]");
+        System.out.println("Email length: " + signUpRequest.email().length());
+
         if(userRepository.existsByEmail(signUpRequest.email()))
             throw new IllegalArgumentException("Email address already in use.");
 
@@ -43,10 +47,10 @@ public class AuthServiceImpl implements AuthService {
 
         User user = new User();
         user.setUsername(signUpRequest.username());
-        user.setEmail(signUpRequest.username());
-        user.setFirstName(signUpRequest.username());
-        user.setLastName(signUpRequest.username());
-        user.setPassword(passwordEncoder.encode(signUpRequest.username()));
+        user.setEmail(signUpRequest.email());
+        user.setFirstName(signUpRequest.firstName());
+        user.setLastName(signUpRequest.lastName());
+        user.setPassword(passwordEncoder.encode(signUpRequest.password()));
 
         // Set security defaults
         user.setAccountNonLocked(true);
@@ -67,6 +71,9 @@ public class AuthServiceImpl implements AuthService {
         String verificationCode = generateVerificationCode();
         user.setEmailVerificationCode(verificationCode);
         user.setEmailVerificationExpiry(LocalDateTime.now().plusHours(24));
+
+        // Debug the user object before saving
+        System.out.println("User email before save: [" + user.getEmail() + "]");
 
         userRepository.save(user);
 
